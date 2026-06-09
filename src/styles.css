@@ -1,0 +1,54 @@
+/* ============================================================================
+ * HoneyVectors Design System — global entry point
+ * Consumers link THIS file only. It pulls the full token + font closure.
+ * "Beeswax Relaxed" — dark by default, Signal-Orange accent, hexagon-native.
+ * ========================================================================== */
+
+@import "./tokens/fonts.css";
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/effects.css";
+@import "./components.css";
+
+/* ── Base reset / element defaults ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background-color: var(--hv-void);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tr-display);
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--hv-signal);
+  color: var(--hv-white);
+}
+
+/* Utility: the house dotted-grid texture is defined in tokens/effects.css */

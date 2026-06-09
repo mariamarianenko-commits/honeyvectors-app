@@ -1,0 +1,276 @@
+/* ============================================================================
+ * HoneyVectors — Component classes
+ * Styling for the reusable primitives (Button, Badge, Card, Input, HexIcon,
+ * Logo). Shipped to consumers via styles.css so components carry their real
+ * hover / press / focus behaviour. All values pull from the token layer.
+ * ========================================================================== */
+
+/* ───────────────────────────── BUTTON ─────────────────────────────────── */
+.hv-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  isolation: isolate;
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease-morph),
+    box-shadow var(--dur-fast) var(--ease-morph),
+    background-color var(--dur-fast) var(--ease-morph),
+    color var(--dur-fast) var(--ease-morph),
+    border-color var(--dur-fast) var(--ease-morph);
+}
+.hv-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--hv-void), 0 0 0 5px var(--hv-signal);
+}
+.hv-btn:disabled,
+.hv-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Sizes */
+.hv-btn--sm { padding: 0.5rem 0.9rem; font-size: var(--fs-body-sm); }
+.hv-btn--md { padding: 0.7rem 1.25rem; font-size: var(--fs-body); }
+.hv-btn--lg { padding: 1rem 1.75rem; font-size: var(--fs-body-lg); }
+
+/* The rising bottom-up fill (signature interaction) */
+.hv-btn__fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.hv-btn__fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hv-void);
+  transform: translateY(100%);
+  transition: transform var(--dur-base) var(--ease-morph);
+}
+.hv-btn:hover .hv-btn__fill::after { transform: translateY(0); }
+
+/* Hexagon icon chip on the trailing edge */
+.hv-btn__hex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9em;
+  height: 2.2em;
+  margin: -0.62em -0.5em -0.62em 0.2em;
+  background: var(--hv-void);
+  color: var(--hv-white);
+  clip-path: var(--hex-pointy);
+  transition: background-color 0.7s var(--ease-morph),
+    color 0.7s var(--ease-morph), transform 0.7s var(--ease-morph);
+}
+.hv-btn--sm .hv-btn__hex { width: 1.5em; height: 1.74em; }
+.hv-btn:hover .hv-btn__hex {
+  background: var(--hv-white);
+  color: var(--hv-void);
+  transform: rotate(-360deg);
+}
+
+/* Primary — Signal Orange flood + warm glow */
+.hv-btn--primary {
+  background: var(--hv-signal);
+  border-color: var(--hv-signal);
+  color: var(--hv-white);
+  box-shadow: var(--glow-signal);
+}
+.hv-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-signal-strong);
+}
+.hv-btn--primary:active { transform: translateY(0) scale(0.98); }
+
+/* Secondary — Void pill, inverts to orange-bordered on hover */
+.hv-btn--secondary {
+  background: var(--hv-void);
+  border-color: var(--hv-line-strong);
+  color: var(--hv-white);
+}
+.hv-btn--secondary .hv-btn__fill::after { background: var(--hv-signal); }
+.hv-btn--secondary:hover { border-color: var(--hv-signal); }
+.hv-btn--secondary .hv-btn__hex { background: var(--hv-signal); }
+.hv-btn--secondary:hover .hv-btn__hex { background: var(--hv-white); color: var(--hv-void); }
+
+/* Ink — void pill for orange / light backgrounds (keeps the pill + hex vibe) */
+.hv-btn--ink {
+  background: var(--hv-void);
+  border-color: var(--hv-void);
+  color: var(--hv-white);
+  box-shadow: 0 14px 34px -12px rgba(0, 0, 0, 0.45);
+}
+.hv-btn--ink .hv-btn__fill::after { background: var(--hv-white); }
+.hv-btn--ink:hover { transform: translateY(-2px); color: var(--hv-void); }
+.hv-btn--ink:active { transform: translateY(0) scale(0.98); }
+.hv-btn--ink .hv-btn__hex { background: var(--hv-white); color: var(--hv-void); }
+.hv-btn--ink:hover .hv-btn__hex { background: var(--hv-void); color: var(--hv-white); transform: rotate(-360deg); }
+
+/* Ghost — quiet, fills to surface */
+.hv-btn--ghost {
+  background: transparent;
+  color: var(--foreground);
+}
+.hv-btn--ghost:hover { background: color-mix(in oklab, var(--hv-white) 8%, transparent); }
+
+/* Link — text with animated underline */
+.hv-btn--link {
+  background: transparent;
+  color: var(--foreground);
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+  gap: 0.4em;
+}
+.hv-btn--link .hv-btn__underline {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: color-mix(in oklab, var(--hv-white) 60%, transparent);
+  transition: background-color var(--dur-fast) var(--ease-morph);
+}
+.hv-btn--link:hover .hv-btn__underline { background: var(--hv-signal); }
+
+/* On-light context (white / orange flooded sections) */
+.hv-btn--on-light.hv-btn--ghost { color: var(--hv-void); }
+.hv-btn--on-light.hv-btn--ghost:hover { background: color-mix(in oklab, var(--hv-void) 8%, transparent); }
+.hv-btn--on-light.hv-btn--link { color: var(--hv-void); }
+
+/* ───────────────────────────── BADGE / TAG ────────────────────────────── */
+.hv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-micro);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: var(--tr-eyebrow);
+  white-space: nowrap;
+}
+/* Hex bullet that precedes eyebrow labels */
+.hv-badge__hex {
+  width: 0.7em;
+  height: 0.8em;
+  background: currentColor;
+  clip-path: var(--hex-pointy);
+  flex: none;
+}
+.hv-badge--eyebrow { color: var(--hv-signal); }
+.hv-badge--eyebrow-ink { color: var(--hv-void); }
+.hv-badge--tag {
+  padding: 0.35em 0.7em;
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklab, var(--hv-signal) 15%, transparent);
+  color: var(--hv-signal);
+  letter-spacing: 0.18em;
+}
+.hv-badge--solid {
+  padding: 0.4em 0.8em;
+  border-radius: var(--radius-sm);
+  background: var(--hv-signal);
+  color: var(--hv-void);
+}
+.hv-badge--outline {
+  padding: 0.4em 0.8em;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hv-line-strong);
+  color: var(--foreground);
+  letter-spacing: 0.16em;
+}
+
+/* ───────────────────────────── CARD ───────────────────────────────────── */
+.hv-card {
+  position: relative;
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-8);
+}
+.hv-card--flush { padding: 0; overflow: hidden; }
+.hv-card--tile { border-radius: var(--radius-tile); }
+.hv-card--interactive { transition: transform var(--dur-fast) var(--ease-morph), box-shadow var(--dur-fast) var(--ease-morph); cursor: pointer; }
+.hv-card--interactive:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); }
+
+/* ───────────────────────────── INPUT / FIELD ──────────────────────────── */
+.hv-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.hv-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  color: var(--foreground);
+}
+.hv-label__req { color: var(--hv-signal); margin-left: 0.15em; }
+.hv-input,
+.hv-textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--hv-white) 4%, transparent);
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.9rem;
+  transition: border-color var(--dur-fast) var(--ease-morph), box-shadow var(--dur-fast) var(--ease-morph);
+}
+.hv-textarea { min-height: 7rem; resize: vertical; line-height: 1.5; }
+.hv-input::placeholder,
+.hv-textarea::placeholder { color: var(--muted-foreground); }
+.hv-input:focus,
+.hv-textarea:focus {
+  outline: none;
+  border-color: var(--hv-signal);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--hv-signal) 25%, transparent);
+}
+.hv-input:disabled,
+.hv-textarea:disabled { opacity: 0.5; cursor: not-allowed; }
+.hv-input--invalid,
+.hv-textarea--invalid { border-color: var(--hv-destructive); }
+.hv-field__hint { font-size: var(--fs-caption); color: var(--muted-foreground); }
+.hv-field__hint--error { color: var(--hv-destructive); }
+
+/* ───────────────────────────── HEX ICON CHIP ──────────────────────────── */
+.hv-hexicon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: var(--hex-pointy);
+  flex: none;
+}
+.hv-hexicon--sm { width: 22px; height: 22px; }
+.hv-hexicon--md { width: 36px; height: 36px; }
+.hv-hexicon--lg { width: 52px; height: 52px; }
+.hv-hexicon--signal { background: var(--hv-signal); color: var(--hv-white); }
+.hv-hexicon--ink { background: var(--hv-void); color: var(--hv-white); }
+.hv-hexicon--soft { background: color-mix(in oklab, var(--hv-void) 10%, transparent); color: var(--hv-void); }
+.hv-hexicon--amber { background: var(--hv-amber); color: var(--hv-void); }
+
+/* ───────────────────────────── LOGO ───────────────────────────────────── */
+.hv-logo { display: inline-flex; align-items: center; gap: 0.625rem; }
+.hv-logo__wordmark {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--tr-wordmark);
+  line-height: 1;
+}
+.hv-logo__honey { color: var(--hv-white); }
+.hv-logo--ink .hv-logo__honey { color: var(--hv-void); }
+.hv-logo__vectors { color: var(--hv-signal); }

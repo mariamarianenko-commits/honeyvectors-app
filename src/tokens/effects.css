@@ -1,0 +1,48 @@
+/* HoneyVectors — Effects: shadows, glows, hexagon geometry, motion
+ * The brand leans on two signature effects: (1) warm Signal-Orange GLOW around
+ * primary CTAs and active elements, and (2) the HEXAGON — used as clip-path
+ * everywhere (cursor, tiles, bullets, icon chips, product cards, progress
+ * dots). These clip-path tokens let any element take a hex silhouette.
+ * Motion is purposeful: long, eased "expressive" curves; nothing bounces.
+ */
+
+:root {
+  /* ── Elevation (on dark) ───────────────────────────────────── */
+  --shadow-card: 0 30px 80px -20px rgba(0, 0, 0, 0.55);
+  --shadow-card-sm: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
+  --shadow-pop: 0 20px 50px -15px rgba(0, 0, 0, 0.8);
+  --shadow-float: 0 40px 90px -24px rgba(0, 0, 0, 0.5);
+
+  /* ── Signal glow (the "live" orange aura) ──────────────────── */
+  --glow-signal: 0 10px 30px -8px rgba(232, 97, 26, 0.7);
+  --glow-signal-strong: 0 18px 50px -8px rgba(232, 97, 26, 0.9);
+  --glow-signal-tile: 0 30px 80px -20px rgba(232, 97, 26, 0.45);
+  --glow-amber: 0 0 6px rgba(245, 166, 35, 0.55); /* hex cursor drop-shadow */
+
+  /* ── Hexagon clip-paths ────────────────────────────────────── */
+  /* Pointy-top (points up/down) — cursor, badges, bullets, progress dots */
+  --hex-pointy: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); /* @kind other */
+  /* Flat-top (points left/right) — product cards, floating tiles */
+  --hex-flat: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); /* @kind other */
+  /* 7-cell honeycomb "flower" cluster silhouette — the HoneyVectors mark */
+  --hex-cluster: polygon(40% 0%, 60% 0%, 72% 14%, 91% 14%, 100% 32%, 91% 50%, 100% 68%, 91% 86%, 72% 86%, 60% 100%, 40% 100%, 28% 86%, 9% 86%, 0% 68%, 9% 50%, 0% 32%, 9% 14%, 28% 14%); /* @kind other */
+
+  /* ── Hairlines & dotted-grid texture ───────────────────────── */
+  --grid-line: rgba(255, 255, 255, 0.1); /* @kind color */
+
+  /* ── Motion ────────────────────────────────────────────────── */
+  --ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);  /* @kind other */
+  --ease-morph: cubic-bezier(0.65, 0, 0.35, 1);       /* @kind other */
+  --ease-in-expo: cubic-bezier(0.83, 0, 0.17, 1);     /* @kind other */
+  --dur-fast: 0.3s;   /* @kind other */
+  --dur-base: 0.6s;   /* @kind other */
+  --dur-slow: 1.1s;   /* @kind other */
+}
+
+/* Dotted-grid background texture (loader, 3D mock backdrop) */
+.hv-grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

@@ -1,0 +1,62 @@
+/* HoneyVectors — Color tokens
+ * "Beeswax Relaxed" — a dark-default palette. Void-black canvas, Signal-Orange
+ * as the single loud brand accent, Amber/Honey as the warm secondary, and a
+ * tightly-controlled neutral ramp. Orange is used with intent — as a flood
+ * (footer, leak section, CTAs), never as decoration.
+ *
+ * oklch values mirror the production stylesheet 1:1; hex equivalents are noted
+ * for tooling that needs them.
+ */
+
+:root {
+  /* ── Brand core ─────────────────────────────────────────────── */
+  --hv-void: oklch(0.14 0 0);            /* #0D0D0D  — the canvas, "Void Black" */
+  --hv-signal: oklch(0.65 0.19 42);      /* #E8611A  — "Signal Orange", primary */
+  --hv-amber: oklch(0.78 0.16 75);       /* #F5A623  — "Amber", secondary warm  */
+  --hv-deep-amber: oklch(0.72 0.16 65);  /* #E8941A  — pressed/darker amber      */
+  --hv-honey: #FFD166;                   /* warm honey-yellow (loader orbit hex) */
+  --hv-honey-deep: #FFC233;
+
+  /* ── Neutral ramp (warm-leaning) ───────────────────────────── */
+  --hv-ink: oklch(0.96 0 0);             /* #F0F0F0 — primary text on dark       */
+  --hv-white: #FFFFFF;
+  --hv-surface: oklch(0.18 0 0);         /* #1A1A1A — raised card on void        */
+  --hv-surface-2: oklch(0.22 0 0);       /* #2A2A2A — muted / secondary surface  */
+  --hv-muted-fg: oklch(0.7 0.02 60);     /* warm grey — captions, meta           */
+  --hv-line: oklch(1 0 0 / 0.08);        /* hairline border on dark              */
+  --hv-line-strong: oklch(1 0 0 / 0.12); /* input border on dark                 */
+
+  /* ── Functional ────────────────────────────────────────────── */
+  --hv-success: #22C55E;                 /* checklist ticks                      */
+  --hv-destructive: oklch(0.6 0.22 25);
+
+  /* macOS browser-chrome dots (used in mock frames) */
+  --hv-dot-red: #FF5F57;
+  --hv-dot-amber: #FEBC2E;
+  --hv-dot-green: #28C840;
+
+  /* ── Semantic aliases (shadcn-compatible — what components read) ── */
+  --background: var(--hv-void);
+  --foreground: var(--hv-ink);
+  --card: var(--hv-surface);
+  --card-foreground: var(--hv-ink);
+  --popover: var(--hv-surface);
+  --popover-foreground: var(--hv-ink);
+  --primary: var(--hv-signal);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: var(--hv-surface-2);
+  --secondary-foreground: var(--hv-ink);
+  --muted: var(--hv-surface-2);
+  --muted-foreground: var(--hv-muted-fg);
+  --accent: var(--hv-amber);
+  --accent-foreground: var(--hv-void);
+  --destructive: var(--hv-destructive);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: var(--hv-line);
+  --input: var(--hv-line-strong);
+  --ring: var(--hv-signal);
+
+  /* Inverse scope — sections flooded white or orange flip text to ink */
+  --on-light: var(--hv-void);
+  --on-signal: var(--hv-void);
+}

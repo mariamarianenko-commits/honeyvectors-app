@@ -1,0 +1,57 @@
+/* HoneyVectors — Typography tokens
+ * Two voices: Archivo Black for everything structural & loud (headlines,
+ * wordmark, tile labels, the giant footer wordmark) and Inter for everything
+ * you actually read (body, sub-heads, UI). Display type is set TIGHT —
+ * leading 0.85–0.95, negative tracking — and frequently UPPERCASE. Body is
+ * relaxed, sentence case, slightly loose leading.
+ *
+ * Scale roles:
+ *   --fs-mega     footer wordmark            --fs-lead     hero sub-paragraph
+ *   --fs-display  hero headline              --fs-body-*   UI / reading text
+ *   --fs-h1..h4   section statements
+ */
+
+:root {
+  /* Families (also declared in fonts.css; re-exported here for discoverability) */
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; /* @kind font */
+  --font-body: "Outfit", system-ui, sans-serif;                /* @kind font */
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace; /* @kind font */
+
+  /* ── Fluid display scale (min … preferred … max) ───────────── */
+  --fs-mega: clamp(4rem, 16vw, 20rem);         /* @kind font */
+  --fs-display: clamp(2.25rem, 6.8vw, 6.5rem); /* @kind font */
+  --fs-h1: clamp(2.5rem, 8vw, 8rem);           /* @kind font */
+  --fs-h2: clamp(2.6rem, 6vw, 6rem);           /* @kind font */
+  --fs-h3: clamp(2rem, 4.4vw, 3.8rem);         /* @kind font */
+  --fs-h4: clamp(1.6rem, 3vw, 3rem);           /* @kind font */
+
+  /* ── Body / UI scale ───────────────────────────────────────── */
+  --fs-lead: clamp(1.125rem, 1.6vw, 1.5rem);   /* @kind font */
+  --fs-body-lg: 1.125rem;   /* @kind font */
+  --fs-body: 1rem;          /* @kind font */
+  --fs-body-sm: 0.875rem;   /* @kind font */
+  --fs-caption: 0.75rem;    /* @kind font */
+  --fs-micro: 0.625rem;     /* @kind font */
+
+  /* ── Weights ───────────────────────────────────────────────── */
+  --fw-regular: 400;        /* @kind font */
+  --fw-medium: 500;         /* @kind font */
+  --fw-semibold: 600;       /* @kind font */
+  --fw-bold: 700;           /* @kind font */
+  --fw-black: 900;          /* @kind font */
+
+  /* ── Leading ───────────────────────────────────────────────── */
+  --lh-mega: 0.85;          /* @kind font */
+  --lh-display: 0.9;        /* @kind font */
+  --lh-tight: 0.95;         /* @kind font */
+  --lh-snug: 1.15;          /* @kind font */
+  --lh-body: 1.6;           /* @kind font */
+
+  /* ── Tracking ──────────────────────────────────────────────── */
+  --tr-display: -0.02em;    /* @kind font */
+  --tr-tightest: -0.04em;   /* @kind font */
+  --tr-normal: 0;           /* @kind font */
+  --tr-wordmark: 0.14em;    /* @kind font */
+  --tr-eyebrow: 0.3em;      /* @kind font */
+  --tr-mono: 0.22em;        /* @kind font */
+}
